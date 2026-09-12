@@ -427,6 +427,18 @@
 </a>
 
 <script>
+  // Ao clicar em qualquer link interno (#...), revela o conteúdo da seção na hora,
+  // sem depender só da detecção de rolagem (evita o "branco" ao pular direto pra seção)
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var id = a.getAttribute('href');
+      var target = id && id.length > 1 ? document.querySelector(id) : null;
+      if(target){
+        target.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+      }
+    });
+  });
+
   // Nav toggle
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
